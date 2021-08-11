@@ -1,0 +1,217 @@
+import 'package:alura_project/screens/three_screen.dart';
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Primeira página"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: ()  {
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ThreeScreen()),
+                );
+              },
+              child: Text('Ir para a página 3 ->'),
+            ),
+
+            SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: ()  {
+               Navigator.pop();
+              },
+              child: Text('<- Voltar para a página 2'),
+            ),
+          ]
+        )
+      ),
+    );
+  }
+}
+
+mport 'package:flutter/widgets.dart';
+import 'package:nuvigator/nuvigator.dart';
+import 'package:flutter/material.dart';
+
+
+part 'main.g.dart';
+
+class MyScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Alura nuvigator"),
+      ),
+      body: Center(
+        child: Text(
+            'Esta tela foi aberta através do nuvigator!',
+            style: TextStyle(fontSize: 20),
+        ),
+      ),
+    );
+  }
+}
+
+import 'package:alura_project/screens/three_screen.dart';
+
+@nuRouter
+class MainRouter extends NuRouter {
+
+  @NuRoute()
+  ScreenRoute myRoute() => ScreenRoute(
+    builder: (_) => MyScreen(),
+  );
+
+  @override
+  Map<RouteDef, ScreenRouteBuilder> get screensMap  => _$screensMap;
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      builder: Nuvigator(
+        router: MainRouter(),
+        screenType: materialScreenType,
+        initialRoute: MainRoutes.myRoute,
+      ),
+    );
+  }
+}
+
+name: alura_nuvigator
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+  nuvigator: ^0.7.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^1.11.0
+
+flutter:
+  uses-material-design: true
+import 'package:alura_nuvigator/navigation/alura_router.dart';
+import 'package:flutter/material.dart';
+import 'package:nuvigator/nuvigator.dart';
+
+class HomeScreen extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+
+    final router = NuRouter.of<AluraRouter>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Primeira página"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: ()  {
+
+            final router = NuRouter.of<AluraRouter>(context);
+            router.toPageTwo();
+          },
+          child: Text('Ir para a página 2 ->'),
+        ),
+      ),
+    );
+  }
+}/
+
+mport 'package:flutter/material.dart';
+import 'package:nuvigator/nuvigator.dart';
+
+class HomeScreen extends StatelessWidget {
+
+  @override
+  
+  Widget build(BuildContext context) {
+
+    final router = NuRouter.of<AluraRouter>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Primeira página"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: ()  {
+
+   
+            final router = NuRouter.of<AluraRouter>(context);
+            router.toPageTwo();
+          },
+          child: Text('Ir para a página 2 ->'),
+        ),
+      ),
+    );
+  }
+}
+
+import 'package:alura_nuvigator/navigation/alura_router.dart';
+import 'package:flutter/material.dart';
+import 'package:nuvigator/nuvigator.dart';
+
+class ThreeScreen extends StatelessWidget {
+
+  final String texto;
+  ThreeScreen({Key key, @required this.texto}) : super(key: key);
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    final router = NuRouter.of<AluraRouter>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+	  
+        title: Text("Terceira página"),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(
+        child: Text(
+		
+          this.texto.isEmpty ? 'Nada informado!' : this.texto,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+      ),
+    );
+  }
+}
+
